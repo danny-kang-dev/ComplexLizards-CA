@@ -17,8 +17,7 @@ We are looking at completing one main variation which we believe will be nontriv
 
 ## Theoretical Results
 
-![Image of graph]
-(https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph.png)
+![Image of graph](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph.png)
 
 The above graph represents the distribution of scales that we hope to see as this would mimic the distributions that the paper had. 
 
