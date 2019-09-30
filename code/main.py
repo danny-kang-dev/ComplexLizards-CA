@@ -1,22 +1,42 @@
+# Standard libraries
 import time
+import sys
 
-from helpers import *
+# Outside libraries
+import pygame
+
+# Project modules
+import helpers
 from view import View
 from hexMap import HexMap
 
 
 def draw_tiles_demo():
-    """ Draws a 25x20 hex array, then waits for two seconds. """
+    """ Draws a hex array, then runs a manukyan simulation
+        on it for 1000 time steps.
+    """
 
-    assert_python_version(3, 7)
+    helpers.assert_python_version(3, 6)
+
+    #   Create View object
     view = View()
     view.create_window()
-    hex_map = HexMap(width=25, height=20)
+
+    #   Initialize Map
+    hex_map = HexMap(width=35, height=25)
+    hex_map.set_update_function(helpers.manukyan)
     view.draw_hex_map(hex_map)
-    start = time.time()
-    while time.time() < start + 2:
-        pass
+
+    for i in range(1000):
+        time.sleep(0.1)
+        hex_map.step()
+        view.draw_hex_map(hex_map)
+
+        events = pygame.event.get()
+        if helpers.pygame_quit_event(events):
+            pygame.quit()
+            sys.exit()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     draw_tiles_demo()
