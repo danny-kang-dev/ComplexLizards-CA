@@ -16,7 +16,7 @@ There are distinct properties associated with skin color changes in lizards as t
 We are looking at completing one main variation which we believe will be nontrivial as we hope to be able to model the color of scales as the ocellated lizards change from juvenile to adults. While juvenile, the lizards have white and brown scale colors while the adults have green and black colors. We want to be able to model how the colors change from juvenile to adult while forming the labyrinthe patterns visible on adult lizards. This means that besides repeating the analysis that we will perform to ensure validation of the first experiment we will be looking at the distribution of color change as well as trying to ensure that the rules the cellular automata follow are similar to that of the different lizards. 
 
 ## Theoretical Results
-![graph]
+![Image of graph]
 (https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph.png)
 The above graph represents the distribution of scales that we hope to see as this would mimic the distributions that the paper had. 
 
