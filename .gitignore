@@ -1,0 +1,6 @@
+# Ignore pycache and compiled python files
+*/__pycache__/*
+*.pyc
+
+# Ignore pycharm folder
+*/.idea
