@@ -10,8 +10,8 @@ ADJ_KERNEL = ((0, 1, 0),
               (0, 1, 0))
 
 # Window settings
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 1080
+WINDOW_HEIGHT = 720
 WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
 
 # Hex rendering settings
@@ -24,3 +24,7 @@ GREEN = (50, 175, 40)
 GRAY = (75, 75, 75)
 WHITE = (255, 255, 255)
 RED = (180, 40, 30)
+
+# Constants representing discrete states
+GREEN_STATE = 1
+BLACK_STATE = 0

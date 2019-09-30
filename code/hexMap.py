@@ -1,4 +1,5 @@
 from constants import *
+from helpers import *
 import random
 
 
@@ -80,24 +81,76 @@ class HexMap(object):
                 else:
                     yield item
 
+    def step(self):
+        """ Updates each cell in the automaton. The cell should have an observe_neighbors method that
+            observes the states of nearby cells and an update_state method that applies changes for
+            the step.
+        """
+
+        # Store neighbor states for each cell
+        for cell in self.tiles():
+            cell.observe_neighbors()
+
+        # Update each cell
+        for cell in self.tiles():
+            cell.update_state()
+
+    def set_update_function(self, new_func):
+        """ Sets the update function for all cells in the array. See HexCell.set_update_function"""
+
+        for cell in self.tiles():
+            cell.set_update_function(new_func)
+
 
 class HexCell(object):
     """ Represents a hexagonal cell in a 2D array. """
 
     def __init__(self):
-        self.state = 0
+        self.state = None
+        self.randomize_state()
+
         self.neighbors = []
+        self.stored_neighbor_states = None
+        self.update_function = manukyan
 
     def set_neighbors(self, neighbors):
         """ Assigns neighbors to the HexCell. """
         self.neighbors = neighbors
-        self.randomize_state()
+
+    def observe_neighbors(self):
+        """ Observes neighboring cells and stores their states in self.stored_neighbor_states. """
+        self.stored_neighbor_states = [neighbor.state for neighbor in self.neighbors]
+
+    def update_state(self):
+        """ Updates the cell's current state based on the observed state of its neighbors.
+            Observe_neighbors should be called prior to updating the state.
+        """
+
+        if self.stored_neighbor_states is None:
+            raise ValueError("No neighboring states are stored. Did you call HexCell.observe_neighbors?")
+
+        # Update current state based on update function
+        self.state = self.update_function(self.state, self.stored_neighbor_states)
+
+        # Reset stored neighbor states, so update isn't called twice
+        self.stored_neighbor_states = None
+
+    def set_update_function(self, new_func):
+        """ Changes the function that updates a cell's state.
+
+            inputs:
+                new_func(current_state, neighbors): takes two arguments ---
+                    - current_state (int): state of current cell
+                    - neighbors (list): list of neighboring cell states
+        """
+
+        self.update_function = new_func
 
     def color(self):
         """ Returns an RGB color value based on the current state. """
-        if self.state == 0:
+        if self.state is BLACK_STATE:
             return GRAY
-        elif self.state == 1:
+        elif self.state is GREEN_STATE:
             return GREEN
         return RED
 
@@ -106,4 +159,4 @@ class HexCell(object):
         self.state = random.choice([0, 1])
 
     def __repr__(self):
-        return f"<HexCell at {id(self)}, state {self.state}>"
+        return "<HexCell at %s, state %s>" % (id(self), self.state)

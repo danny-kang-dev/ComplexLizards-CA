@@ -1,9 +1,12 @@
+# Standard libraries
+import math
+
+# Outside libraries
 import pygame
-from hexMap import HexMap
+
+# Project modules
 from constants import *
 from helpers import *
-import time
-import math
 
 
 class View(object):
