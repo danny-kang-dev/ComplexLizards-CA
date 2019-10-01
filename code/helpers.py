@@ -63,12 +63,14 @@ def manukyan(current_state, neighbors):
                         6: 0.355,
                         7: 0.476}
 
+    time_step = 0.1  # Decrease for more gradual changes; decreases all probabilities by a ratio
+
     if current_state is GREEN_STATE:
-        p_change = p_green_to_black[num_green]
+        p_change = p_green_to_black[num_green] * time_step
         new_state = BLACK_STATE if random.random() < p_change else GREEN_STATE
 
     elif current_state is BLACK_STATE:
-        p_change = p_black_to_green[num_black]
+        p_change = p_black_to_green[num_black] * time_step
         new_state = GREEN_STATE if random.random() < p_change else BLACK_STATE
 
     else:
