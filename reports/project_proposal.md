@@ -12,6 +12,8 @@ This paper proposes a cellular automata model to replicate patterns in ocellated
 ## Experiments
 There are distinct properties associated with skin color changes in lizards as they grow from infant to juvenile to adult stage. The paper closely examines those properties to create a mathematical model that mirrors those changing formulas to predict the evolution of skin according to time. What we hope to do is replicate this model by recreating it in Python with some sort of visualization in order to both mathematically and visually corroborate that our model approximates the paper’s model.
 
+![Image of visualization](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/visual.png)
+
 ## Experiment Variations
 We are looking at completing one main variation which we believe will be nontrivial as we hope to be able to model the color of scales as the ocellated lizards change from juvenile to adults. While juvenile, the lizards have white and brown scale colors while the adults have green and black colors. We want to be able to model how the colors change from juvenile to adult while forming the labyrinthe patterns visible on adult lizards. This means that besides repeating the analysis that we will perform to ensure validation of the first experiment we will be looking at the distribution of color change as well as trying to ensure that the rules the cellular automata follow are similar to that of the different lizards. 
 
@@ -30,7 +32,7 @@ Validating our cellular automata model might be challenging. The validation metr
 ## Next Steps
 For the first week, we are hoping to accomplish the following:
 * Figure out how to represent the cellular automata on a 2d matrix (as lizards have hexagonal automata)
-* We already believe this can be done by implementing a kernel of [[0, 1, 1], [1,0,1], [1,1,0]] may be able to solve this but * we need to do a more deep dive and implement a first-pass attempt
+* We already believe this can be done by implementing a kernel of [[0, 1, 1], [1,0,1], [1,1,0]] may be able to solve this but we need to do a deeper dive and implement a first-pass attempt
 * Research best methods to visualize the automata
   * We don’t know the best way to visualize hexagonal scales yet
 * Try to implement rules similar to the paper we are looking at
