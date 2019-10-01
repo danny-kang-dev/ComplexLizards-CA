@@ -63,6 +63,8 @@ def manukyan(current_state, neighbors):
                         6: 0.355,
                         7: 0.476}
 
+    # TODO this time step math is not completely sound.
+    # Probability should increase as exponential decay approaching 1, not just by a proportion.
     time_step = 0.1  # Decrease for more gradual changes; decreases all probabilities by a ratio
 
     if current_state is GREEN_STATE:
