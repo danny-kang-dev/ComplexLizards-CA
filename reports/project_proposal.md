@@ -10,7 +10,7 @@ https://www.nature.com/articles/nature22031#extended-data
 This paper proposes a cellular automata model to replicate patterns in ocellated lizards as they age. Their model, which used hexagonal scales that were either green or black in color, produced results with similar scale distributions and results visuallyl closer to real lizards than a random distribution, suggesting that scale color is actually affected by the color of nearby scales.
 
 ## Experiments
-There are distinct properties associated with skin color changes in lizards as they grow from infant to juvenile to adult stage. The paper closely examines those properties to create a mathematical model that mirrors those changing formulas to predict the evolution of skin according to time. What we hope to do is replicate this model by recreating it in Python with some sort of visualization in order to both mathematically and visually corroborate that our model approximates the paper’s model.
+There are distinct properties associated with skin color changes in lizards as they grow from infant to juvenile to adult stage regarding neighbor colorings. The paper closely examines those properties to create both a mathematical model that mirrors those changing formulas to predict the evolution of skin according to time and a cellular automata model to demonstrate these predictions. What we hope to do is replicate this model by recreating it in Python with some sort of visualization in order to both mathematically and visually corroborate that our model approximates the paper’s model. Our initial visualization can be seen below.
 
 ![Image of visualization](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/visual.png)
 
