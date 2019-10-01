@@ -7,7 +7,7 @@ import pygame
 
 # Project modules
 import helpers
-from view import View
+from view import View, DataVizElement, StateCounter
 from hexMap import HexMap
 
 
@@ -25,11 +25,16 @@ def draw_tiles_demo():
     #   Initialize Map
     hex_map = HexMap(width=35, height=25)
     hex_map.set_update_function(helpers.manukyan)
-    view.draw_hex_map(hex_map)
+    view.draw_hex_map(hex_map, flip=False)
+
+    #   Initialize visualization elements
+    cell_counter = StateCounter(hex_map)
+    view.add_UI_element(cell_counter)
 
     for i in range(1000):
         time.sleep(0.1)
         hex_map.step()
+        view.update()
         view.draw_hex_map(hex_map)
 
         events = pygame.event.get()

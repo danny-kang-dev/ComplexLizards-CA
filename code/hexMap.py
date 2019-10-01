@@ -101,6 +101,14 @@ class HexMap(object):
         for cell in self.tiles():
             cell.set_update_function(new_func)
 
+    def state_histogram(self):
+        """ Returns a dictionary mapping different states to their respective counts in the map. """
+
+        dictionary = {}
+        for cell in self.tiles():
+            dictionary[cell.state] = dictionary.get(cell.state, 0) + 1
+        return dictionary
+
 
 class HexCell(object):
     """ Represents a hexagonal cell in a 2D array. """
