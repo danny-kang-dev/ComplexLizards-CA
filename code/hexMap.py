@@ -114,8 +114,8 @@ class HexCell(object):
     """ Represents a hexagonal cell in a 2D array. """
 
     def __init__(self):
-        self.state = BLACK_STATE
-
+        self.state = None
+        self.randomize_state()
         self.neighbors = []
         self.stored_neighbor_states = None
         self.update_function = manukyan

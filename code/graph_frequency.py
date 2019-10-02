@@ -31,6 +31,9 @@ def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     return count
 
 def update_pmf_values(hexmap, cell_color):
+    """ produces list of pmf values for either black or green
+        color for each number of neighbors
+    """
     y_values_black = []
     y_values_green = []
     pmf = []
@@ -53,10 +56,15 @@ def update_pmf_values(hexmap, cell_color):
         return pmf
 
 def draw_pmf(hexmap, cell_color):
+    """ draw pmf graph for each state of HexMap object
+    """
     df = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, cell_color)})
     plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
     plt.pause(0.0001)
     plt.clf()
+
+# Draw PMF for 100 stpes of HexMap object with
+# y-axis as frequency and x-axis as number of neighbors
 
 for i in range(100):
     time.sleep(0.1)
