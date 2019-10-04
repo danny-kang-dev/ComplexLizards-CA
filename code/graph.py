@@ -18,6 +18,7 @@ def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     """ Counts number of cells with num_neighbors number of 
         differently colored neighbors
     """
+    # FIXME: Might be counting neighbors' neighbors and only counting green cells
     count = 0
     for cell in hexmap.tiles():
         if cell.state == cell_color:
