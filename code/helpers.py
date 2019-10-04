@@ -80,6 +80,36 @@ def manukyan(current_state, neighbors):
 
     return new_state
 
+def deterministic(current_state, neighbors):
+    """ Returns the next state of a cell based on a list of neighbor states.
+
+        if current_state is GREEN_STATE, turns black when 4 or more neighbors are black
+        if current_state is BLACK_STATE, turns green when 3 or more neighbors are green
+
+        inputs:
+            current state (int): either 1 (representing green) or 0 (representing black)
+            neighbors (list): a list of states for neighbors, with the same pattern
+    """
+
+    num_green = neighbors.count(GREEN_STATE)
+    num_black = neighbors.count(BLACK_STATE)
+
+    if current_state is GREEN_STATE:
+        if num_black > 3:
+            new_state = BLACK_STATE 
+        else:
+            new_state = current_state
+
+    elif current_state is BLACK_STATE:
+        if num_green > 2:
+            new_state = GREEN_STATE 
+        else:
+            new_state = current_state
+
+    else:
+        raise ValueError("Current state is invalid for deterministic model.")
+
+    return new_state
 
 def pygame_quit_event(events):
     """ Returns True if a quit event has been raised by Pygame. """

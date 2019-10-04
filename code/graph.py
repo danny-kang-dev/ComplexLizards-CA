@@ -13,9 +13,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
- 
-hex_map = HexMap(width=35, height=25)
-hex_map.set_update_function(helpers.manukyan)
 
 def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     """ Counts number of cells with num_neighbors number of 
@@ -31,8 +28,8 @@ def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     return count
 
 def update_pmf_values(hexmap, cell_color):
-    """ produces list of pmf values for either black or green
-        color for each number of neighbors
+    """ produces list of pmf values for cell_color
+        for each number of neighbors
     """
     y_values_black = []
     y_values_green = []
@@ -55,19 +52,33 @@ def update_pmf_values(hexmap, cell_color):
             pmf.append(val/total)
         return pmf
 
-def draw_pmf(hexmap, cell_color):
+def draw_pmf(update_function, steps):
     """ draw pmf graph for each state of HexMap object
     """
-    df = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, cell_color)})
-    plt.plot( 'x', 'y', data=df, linestyle='-', marker='o')
-    plt.pause(0.0001)
-    plt.clf()
+    hexmap = HexMap(width=35, height=25)
+    hexmap.set_update_function(update_function)
+    if update_function == helpers.manukyan:
+        y_lim = 0.45
+    else:
+        y_lim = 1
+    plt.ion()
+    for i in range(steps):
+        time.sleep(0.0001)
+        df1 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 1)})
+        df2 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 0)})
+        _, ax = plt.subplots()
+        plt.ylim(0, y_lim)
+        plt.xlabel('number of neighbors')
+        plt.ylabel('frequency')
 
-# Draw PMF for 100 stpes of HexMap object with
-# y-axis as frequency and x-axis as number of neighbors
+        ax.plot( 'x', 'y', data=df1, linestyle='-', marker='o', color = 'green', label = 'Green')
+        ax.plot( 'x', 'y', data=df2, linestyle='-', marker='o', color = 'black', label = 'Black')
 
-for i in range(100):
-    time.sleep(0.1)
-    draw_pmf(hex_map, 1)
-    hex_map.step()    
+        ax.legend(loc='upper right', shadow=True, fontsize='x-large')
+        plt.pause(0.0001)
+        plt.clf()
+        hexmap.step()
+    
 
+draw_pmf(helpers.manukyan, 100)
+draw_pmf(helpers.deterministic, 100)
