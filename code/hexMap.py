@@ -151,10 +151,12 @@ class HexCell(object):
                     - neighbors (list): list of neighboring cell states
         """
 
+        # TODO make sure update function is valid if using multiple states
         self.update_function = new_func
 
     def color(self):
         """ Returns an RGB color value based on the current state. """
+        # TODO expand switch statement for more than two states
         if self.state is BLACK_STATE:
             return GRAY
         elif self.state is GREEN_STATE:
@@ -163,6 +165,7 @@ class HexCell(object):
 
     def randomize_state(self):
         """ Sets the state to a random value. """
+        # TODO expand to choose between all valid states, if more than two
         self.state = random.choice([0, 1])
 
     def __repr__(self):
