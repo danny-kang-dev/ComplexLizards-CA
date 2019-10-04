@@ -66,15 +66,14 @@ def draw_pmf(update_function, steps):
         time.sleep(0.0001)
         df1 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 1)})
         df2 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 0)})
-        _, ax = plt.subplots()
         plt.ylim(0, y_lim)
         plt.xlabel('number of neighbors')
         plt.ylabel('frequency')
 
-        ax.plot( 'x', 'y', data=df1, linestyle='-', marker='o', color = 'green', label = 'Green')
-        ax.plot( 'x', 'y', data=df2, linestyle='-', marker='o', color = 'black', label = 'Black')
+        plt.plot( 'x', 'y', data=df1, linestyle='-', marker='o', color = 'green', label = 'Green')
+        plt.plot( 'x', 'y', data=df2, linestyle='-', marker='o', color = 'black', label = 'Black')
 
-        ax.legend(loc='upper right', shadow=True, fontsize='x-large')
+        plt.legend(loc='upper right', shadow=True, fontsize='x-large')
         plt.pause(0.0001)
         plt.clf()
         hexmap.step()
