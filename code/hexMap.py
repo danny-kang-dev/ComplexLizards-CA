@@ -17,6 +17,7 @@ class HexMap(object):
         self.width = width
         self.height = height
         self.array = self.populate_cell_array()
+        self.num_steps = 0 # Number of steps taken so far; used to help color switching
 
         # Assign neighbors to each cell
         self.neighbor_kernel = HEX_KERNEL
@@ -86,14 +87,14 @@ class HexMap(object):
             observes the states of nearby cells and an update_state method that applies changes for
             the step.
         """
-
+        self.num_steps += 1
         # Store neighbor states for each cell
         for cell in self.tiles():
             cell.observe_neighbors()
 
         # Update each cell
         for cell in self.tiles():
-            cell.update_state()
+            cell.update_state(self.num_steps)
 
     def set_update_function(self, new_func):
         """ Sets the update function for all cells in the array. See HexCell.set_update_function"""
@@ -119,6 +120,7 @@ class HexCell(object):
         self.neighbors = []
         self.stored_neighbor_states = None
         self.update_function = manukyan
+        self.unique_color = WHITE   # TODO: Consider eveyrthing a diffusion model to slowly have colors change
 
     def set_neighbors(self, neighbors):
         """ Assigns neighbors to the HexCell. """
@@ -128,7 +130,7 @@ class HexCell(object):
         """ Observes neighboring cells and stores their states in self.stored_neighbor_states. """
         self.stored_neighbor_states = [neighbor.state for neighbor in self.neighbors]
 
-    def update_state(self):
+    def update_state(self, curr_turn=0):
         """ Updates the cell's current state based on the observed state of its neighbors.
             Observe_neighbors should be called prior to updating the state.
         """
@@ -137,7 +139,7 @@ class HexCell(object):
             raise ValueError("No neighboring states are stored. Did you call HexCell.observe_neighbors?")
 
         # Update current state based on update function
-        self.state = self.update_function(self.state, self.stored_neighbor_states)
+        self.state = self.update_function(self.state, self.stored_neighbor_states, curr_turn)
 
         # Reset stored neighbor states, so update isn't called twice
         self.stored_neighbor_states = None
@@ -161,12 +163,20 @@ class HexCell(object):
             return GRAY
         elif self.state is GREEN_STATE:
             return GREEN
+        elif self.state is BROWN_STATE:
+            return BROWN
+        elif self.state is WHITE_STATE:
+            return WHITE
         return RED
 
-    def randomize_state(self):
+    def randomize_state(self, aging=True):
         """ Sets the state to a random value. """
         # TODO expand to choose between all valid states, if more than two
-        self.state = random.choice([0, 1])
+        # We want to start off as white/brown, so we want to randomize between 2/3 to start
+        if not aging:
+            self.state = random.choice([0, 1])
+        else:
+            self.state = random.choice([2, 3])
 
     def __repr__(self):
         return "<HexCell at %s, state %s>" % (id(self), self.state)
