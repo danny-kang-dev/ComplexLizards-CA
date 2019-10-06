@@ -24,7 +24,7 @@ def draw_tiles_demo():
 
     #   Initialize Map
     hex_map = HexMap(width=35, height=25)
-    hex_map.set_update_function(helpers.manukyan)
+    hex_map.set_update_function(helpers.deterministic)
     view.draw_hex_map(hex_map, flip=False)
 
     #   Initialize visualization elements

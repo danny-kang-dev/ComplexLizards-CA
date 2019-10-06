@@ -23,6 +23,7 @@ HEX_SPACING_Y = int(HEX_LENGTH*1.8)  # Spacing between adjacent tiles vertically
 GREEN = (50, 175, 40)
 GRAY = (75, 75, 75)
 WHITE = (255, 255, 255)
+BROWN = (139, 69, 19)
 RED = (180, 40, 30)
 BLACK = (0, 0, 0)
 DARK_GRAY = (30, 30, 30)
@@ -30,6 +31,8 @@ DARK_GRAY = (30, 30, 30)
 # Constants representing discrete states
 GREEN_STATE = 1
 BLACK_STATE = 0
+BROWN_STATE = 2
+WHITE_STATE = 3
 
 # UI parameters
 UI_ELEMENT_WIDTH = 200

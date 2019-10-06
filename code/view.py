@@ -153,7 +153,10 @@ class StateCounter(DataVizElement):
         if total_cell_count == 0:
             proportion_green = 0
         else:
-            proportion_green = histogram[GREEN_STATE]/total_cell_count
+            try:
+                proportion_green = histogram[GREEN_STATE]/total_cell_count
+            except:
+                proportion_green = histogram[BROWN_STATE]/total_cell_count
         self.buffer.pop()
         self.buffer.insert(0, proportion_green)
 
@@ -226,4 +229,3 @@ class StateCounter(DataVizElement):
         inverse_text = "%.2f%%" % (inverse_proportion * 100)
         inverse_render = self.large_font.render(inverse_text, 1, inverse_color)
         self.surface.blit(inverse_render, (124, 30))
-
