@@ -95,7 +95,7 @@ def deterministic(current_state, neighbors):
     num_black = neighbors.count(BLACK_STATE)
 
     if current_state is GREEN_STATE:
-        if num_black > 3:
+        if num_black > 3 and num_black < 6:
             new_state = BLACK_STATE 
         else:
             new_state = current_state

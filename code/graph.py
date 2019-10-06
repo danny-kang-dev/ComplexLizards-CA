@@ -18,14 +18,12 @@ def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     """ Counts number of cells with num_neighbors number of 
         differently colored neighbors
     """
-    # FIXME: Might be counting neighbors' neighbors and only counting green cells
     count = 0
     for cell in hexmap.tiles():
         if cell.state == cell_color:
-            for neighbor in cell.neighbors:
-                neighbor.observe_neighbors()
-                if sum(neighbor.stored_neighbor_states) == num_neighbors:
-                    count += 1
+            cell.observe_neighbors()
+            if cell.stored_neighbor_states.count(cell_color) == num_neighbors:
+                count += 1
     return count
 
 def update_pmf_values(hexmap, cell_color):
@@ -59,7 +57,7 @@ def draw_pmf(update_function, steps):
     hexmap = HexMap(width=35, height=25)
     hexmap.set_update_function(update_function)
     if update_function == helpers.manukyan:
-        y_lim = 0.45
+        y_lim = 0.5
     else:
         y_lim = 1
     plt.ion()
@@ -80,5 +78,5 @@ def draw_pmf(update_function, steps):
         hexmap.step()
     
 
-draw_pmf(helpers.manukyan, 100)
-draw_pmf(helpers.deterministic, 100)
+draw_pmf(helpers.manukyan, 500)
+# draw_pmf(helpers.deterministic, 100)
