@@ -40,10 +40,8 @@ One of the interesting observations about the oscellated lizard is the change in
 The first (and easier) experiment that we implemented was the set possible states of colors. We wanted to see how the color distribution changed over time and see if we can visually mimic what the oscellated lizards do while maintaining similar black:green ratios at the end of the simulation (the papers did not give a brown:white ratio to compare to). What we observed was that visually it looks similar to the oscellated lizards’ skin over time, with the major difference being that the colors change suddenly (as is expected). For the end color distribution, we found that ________ (full analysis TBD based on more graphs).
  
  ### 3. Deterministic model (results & interpretation)
- 
-![Image of deterministic result](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png width="100", height="100")<br />
- 
- <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png" width="200" height="200" />
+
+ <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png" width="500" height="500" align="middle"/>
  
 For the deterministic model of lizard, we used two rules for cellular automata. First rule is to convert green scale to black scale when there are more than 3 black neighbors. The second rule is to convert black scale to green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produced extreme behavior, which is all scales except for few scales at corner turning to green in less than 10 steps. 
  
