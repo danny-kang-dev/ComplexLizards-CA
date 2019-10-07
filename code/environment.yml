@@ -1,0 +1,7 @@
+name: ComplexLizards
+
+dependencies:
+  - python=3.7
+  - pip
+  - pip:
+    - pygame
