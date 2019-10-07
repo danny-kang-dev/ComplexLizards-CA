@@ -121,6 +121,7 @@ class HexCell(object):
         self.stored_neighbor_states = None
         self.update_function = manukyan
         self.unique_color = WHITE   # TODO: Consider eveyrthing a diffusion model to slowly have colors change
+        self.node_num = 0
 
     def set_neighbors(self, neighbors):
         """ Assigns neighbors to the HexCell. """

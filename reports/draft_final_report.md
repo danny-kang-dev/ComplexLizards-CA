@@ -1,11 +1,11 @@
 # Lizard Cellular Automata model using pygame
 By Danny Kang, Jeremy Ryan, and Nick Sherman
  
-## Abstract (topics investigated and tools we used)
+## Abstract 
 In ocellated lizards, patterns can be observed on their skin due to green and black labyrinthine patterns created by their lizard scale color. We wish to analyze how such patterns can form through using data gathered from ocellated lizards as they mature and mimic the pattern produced through cellular automaton. 
 
  ---
-## Annotated bibliography (one paper each, what the paper is about, experiments, conclusions)
+## Annotated bibliography 
  
 ### A living mesoscopic cellular automaton made of skin scales 
 Liana Manukyan, Sophie A. Montandon, Anamarija Fofonjka, Stanislav  Smirnov, Michel C. Milinkovitch <br />
