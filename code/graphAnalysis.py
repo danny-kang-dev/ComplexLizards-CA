@@ -17,10 +17,7 @@ import seaborn as sns
 import networkx as nx
 import random
 
-
 hexmap = HexMap(width=35, height=25)
-
-
 
 def convert_graph_draw(hexmap, steps):
 
