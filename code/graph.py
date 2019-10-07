@@ -74,9 +74,10 @@ def draw_pmf(update_function, steps):
 
         plt.legend(loc='upper right', shadow=True, fontsize='x-large')
         plt.pause(0.0001)
+
         plt.clf()
         hexmap.step()
     
 
 draw_pmf(helpers.manukyan, 500)
-# draw_pmf(helpers.deterministic, 100)
+# draw_pmf(helpers.deterministic, 10)
