@@ -43,6 +43,8 @@ The first (and easier) experiment that we implemented was the set possible state
  
 ![Image of deterministic result](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png width="100", height="100")<br />
  
+ <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png" width="200" height="200" />
+ 
 For the deterministic model of lizard, we used two rules for cellular automata. First rule is to convert green scale to black scale when there are more than 3 black neighbors. The second rule is to convert black scale to green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produced extreme behavior, which is all scales except for few scales at corner turning to green in less than 10 steps. 
  
  ### 4. Graphical Analysis (results & interpretation)
