@@ -19,13 +19,10 @@ import random
 
 hexmap = HexMap(width=35, height=25)
 
-def convert_graph_draw(hexmap, steps=0):
-
+def convert_graph_draw(hexmap, steps=0, show=False):
     for i in range(steps):
         hexmap.step()
-
     X=nx.Graph()
-
     node_num = 1
     offset = 0
     colors = []
@@ -51,11 +48,20 @@ def convert_graph_draw(hexmap, steps=0):
             for neighbor in cell.neighbors:
                 if cell.state == neighbor.state:
                     X.add_edge(cell.node_num, neighbor.node_num)
-    
+    if show:
+        nx.draw(X,pos, node_size=50, node_color=colors)
+        plt.show()
+    return X
 
-    nx.draw(X,pos, node_size=50, node_color=colors)
-    for i in sorted(nx.connected_components(X), key=len, reverse=True):
-        print(len(i))
+def plot_graph_pmf(G):
+    num_nodes = np.array([])
+    for i in sorted(nx.connected_components(G), key=len, reverse=True):
+        num_nodes = np.append(num_nodes, len(i))
+    val, cnt = np.unique(num_nodes, return_counts=True)
+    pmf = cnt / len(num_nodes)
+    X = np.column_stack((val, pmf))
+    plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
-
-convert_graph_draw(hexmap)
+    
+G = convert_graph_draw(hexmap, show=True)
+plot_graph_pmf(G)
