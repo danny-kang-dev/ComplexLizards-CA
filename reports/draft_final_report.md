@@ -1,4 +1,4 @@
-# Lizard Cellular Automata model using pygame
+﻿# Lizard Cellular Automata model using pygame
 By Danny Kang, Jeremy Ryan, and Nick Sherman
  
 ## Abstract 
@@ -26,12 +26,18 @@ This paper explains about the reaction-diffusion model or Turing model and empha
  
  ---
 ## Experiments
- 
-Jeremy: intro around how we visualized everything
+
+For our experiments, we replicated and extended the cellular automaton model from the Manukyan paper and performed some analysis. We used Pygame to visualize the model, and were able to simulate it over time.
+
+![CA visualization](https://raw.githubusercontent.com/kdy304g/ComplexLizards-CA/master/images/visual.png)
  
  ### 1. Manukyan model for green black states(results&interpretation)
  
-Jeremy 
+Our first-pass model was a direct implementation of the model used in the Manukyan paper. 
+
+For each cell color, based on its number of like-colored neighbors, there is a probability of changing state before the next time step. For instance, if a green cell has exclusively black neighbors, there is a 0% chance of changing state. This increases as the number of like-colored cells increases.
+
+The original paper, having built the model from graphs of actual lizard scales, has probabilities that may be slightly skewed from our own. Actual scales are not perfectly hexagonal, and sometimes there are scales with more or fewer than six neighbors. As such, there were entries in the Manukyan paper for probability with seven like-colored neighbors which were not used in our model.
  
  ### 2. Adding brown white states(results&interpretation)
  
