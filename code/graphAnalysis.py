@@ -19,7 +19,7 @@ import random
 
 hexmap = HexMap(width=35, height=25)
 
-def convert_graph_draw(hexmap, steps):
+def convert_graph_draw(hexmap, steps=0):
 
     for i in range(steps):
         hexmap.step()
@@ -43,7 +43,7 @@ def convert_graph_draw(hexmap, steps):
             X.add_node(node_num, pos=(10*i+offset, 25-index))
             node_num += 1
         offset += 5
-    pos=nx.get_node_attributes(X,'pos')
+    pos = nx.get_node_attributes(X,'pos')
 
     for row in hexmap.array:
         for cell in row:
@@ -54,6 +54,8 @@ def convert_graph_draw(hexmap, steps):
     
 
     nx.draw(X,pos, node_size=50, node_color=colors)
+    for i in sorted(nx.connected_components(X), key=len, reverse=True):
+        print(len(i))
     plt.show()
 
-convert_graph_draw(hexmap,250)
+convert_graph_draw(hexmap)
