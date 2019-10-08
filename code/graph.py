@@ -20,7 +20,7 @@ def count_scale_neighbor(hexmap, num_neighbors, cell_color):
     """
     count = 0
     for cell in hexmap.tiles():
-        if cell.state == cell_color:
+        if cell.state != cell_color:
             cell.observe_neighbors()
             if cell.stored_neighbor_states.count(cell_color) == num_neighbors:
                 count += 1
