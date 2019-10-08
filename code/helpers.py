@@ -98,8 +98,8 @@ def manukyan(current_state, neighbors, curr_turn=0):
                     6 : 0.256,
                     7 : 0.512,
                     }
-    # TODO this time step math is not completely sound.
-    # Probability should increase as exponential decay approaching 1, not just by a proportion.
+
+
     time_step = 0.1  # Decrease for more gradual changes; decreases all probabilities by a ratio
 
     p_convert_color = 0 # white -> black; brown -> green [on average, not always]
@@ -115,11 +115,11 @@ def manukyan(current_state, neighbors, curr_turn=0):
             p_convert_color = random.random() < p_color_change[num_green + num_black] * curr_turn / 200
 
     if current_state is GREEN_STATE:
-        p_change = p_green_to_black[num_green] * time_step
+        p_change = poisson(p_green_to_black[num_green], time_step)
         new_state = BLACK_STATE if random.random() < p_change else GREEN_STATE
 
     elif current_state is BLACK_STATE:
-        p_change = p_black_to_green[num_black] * time_step
+        p_change = poisson(p_black_to_green[num_black], time_step)
         new_state = GREEN_STATE if random.random() < p_change else BLACK_STATE
 
     elif current_state is WHITE_STATE:
@@ -129,7 +129,7 @@ def manukyan(current_state, neighbors, curr_turn=0):
             else:
                 new_state = BLACK_STATE
         else:
-            p_change = p_white_to_brown[7 - num_white] * time_step
+            p_change = poisson(p_white_to_brown[7 - num_white], time_step)
             new_state = BROWN_STATE if random.random() < p_change else WHITE_STATE
 
     elif current_state is BROWN_STATE:
@@ -139,7 +139,7 @@ def manukyan(current_state, neighbors, curr_turn=0):
             else:
                 new_state = BLACK_STATE
         else:
-            p_change = p_brown_to_white[7 - num_brown] * time_step
+            p_change = poisson(p_brown_to_white[7 - num_brown], time_step)
             new_state = WHITE_STATE if random.random() < p_change else BROWN_STATE
     else:
         raise ValueError("Current state is invalid for Manukyan model.")
@@ -167,8 +167,8 @@ def deterministic(current_state, neighbors, curr_turn=0):
                     6 : 0.064,
                     7 : 0.128,
                     }
-    # TODO this time step math is not completely sound.
-    # Probability should increase as exponential decay approaching 1, not just by a proportion.
+
+
     time_step = 0.1  # Decrease for more gradual changes; decreases all probabilities by a ratio
 
     p_convert_color = 0 # white -> black; brown -> green [on average, not always]
@@ -218,6 +218,12 @@ def deterministic(current_state, neighbors, curr_turn=0):
         raise ValueError("Current state is invalid for deterministic model.")
 
     return new_state
+
+
+def poisson(probability, step):
+    """ Returns the probability of an event occurring over a fractional time step. """
+    return 1 - ((1 - probability) ** step)
+
 
 def pygame_quit_event(events):
     """ Returns True if a quit event has been raised by Pygame. """
