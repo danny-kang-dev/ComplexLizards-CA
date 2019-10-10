@@ -18,11 +18,8 @@ import networkx as nx
 import random
 from pylab import *
 
-<<<<<<< HEAD
 hexmap = HexMap(width=100, height=100)
-=======
 hexmap = HexMap(width=60, height=60)
->>>>>>> 493af910f6731bbcaeccda0d21fdbfcb2d82b874
 
 all_vals = dict()
 
@@ -84,7 +81,6 @@ def get_pmf_data(num_nodes):
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
     X = np.column_stack((val, pmf))
-<<<<<<< HEAD
     _, ax = plt.subplots()
     ax.bar(x=X[:, 0], height=X[:, 1])
     ax.set_yscale('log')
@@ -105,15 +101,11 @@ def plot_graph_cdf(G):
 G = convert_graph_draw(hexmap, steps=10)
 plot_graph_pmf(G)
 plot_graph_cdf(G)
-=======
-    return X
 
 def plot_graph_pmf(G):
     X = get_pmf_data(get_data(G))
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
-
 G = convert_graph_draw(hexmap, steps=150, show=True)
 plot_graph_pmf(G)
->>>>>>> 493af910f6731bbcaeccda0d21fdbfcb2d82b874
