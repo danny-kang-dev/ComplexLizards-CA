@@ -51,29 +51,33 @@ The first (and easier) experiment that we implemented was the set possible state
  
 ### 3. Deterministic model
  
+Manukyan model is based on probability of change based on number of neighbors. What if the cellular automata model were to evolve deterministically according to set of rules? In this experiment, we intend to define and use rules in the new model to produce similar behavior.
+ 
  <p align="center">
     <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png" width="350" height="350" />
  </p>
  
-For the deterministic model of lizard, we used two rules for cellular automata. First rule is to convert green scale to black scale when there are more than 3 black neighbors. The second rule is to convert black scale to green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produced extreme behavior, which is all scales except for few scales at corner turning to green in less than 10 steps. 
+For the deterministic model of lizard, two rules for cellular automata is applied. First rule is to convert green scale to black scale when there are more than 3 black neighbors. The second rule is to convert black scale to green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produce extreme behavior, which is all scales except for few scales at corner turning to green in less than 10 steps. Future steps would be to create a more complicated system of rules to closely mimic patterns in real lizard.
  
 ### 4. Graphical Analysis 
+ In the above experiments, we validate our model with pmf distribution of number of neighbors for four different scales. While the number of neighbors is a solid metric to validate our model, we intend to convert our model to graph to do further analysis of the model in terms of connectedness. <br />
  
  <p align="center">
    <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph_analysis.png" width="400" height="300" alt><br>
-   <em>Model converted to graph using networkx</em>
+   <em><Model converted to graph using networkx></em>
  </p>
  
-To be updated with more analysis
+The graph is converted from our model using the library NetworkX with two simple rules. Color of the nodes are represented correspondingly in green, black, white, and brown. Also, there are edges between all the same color nodes. For this experiment, we focus on green and black nodes’ initial and final state after stabilization.  We consider a model of both height and width of 100, total number of scales being 10,000. <br />
  
 | ![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)  |
 ![CdfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_initial.png)| 
 |:---:|:---:|
  
- 
+Graphs were drawn in log scale for both axes for pmf in order to include a high proportion of graphs with single node in y-axis and the maximum number of nodes in x-axis within a reasonable frame. Two graphs above show the initial state of the model. Pmf graph is heavy tailed with high proportion of small graphs (connected graphs with less than 10 nodes). Similarly, cdf graph on the right shows that most graphs have less than 100 nodes in this model. 
  
 | ![Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png) | ![Cdf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_300steps.png) | 
 |:---:|:---:|
  
+As shown in graphs after running the model 300steps, general trend in both pmf and cdf remain similar. There are some notable changes, however. After model stabilizes, gap between small graphs reduces in pmf. Also, the number of nodes in the largest connected subgraph almost doubles to 5,490 from 2,500. This is interesting but not too surprising as the number of green scales dominates after stabilization. 
 
 
