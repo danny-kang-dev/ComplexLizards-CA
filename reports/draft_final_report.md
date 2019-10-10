@@ -58,9 +58,6 @@ For the deterministic model of lizard, we used two rules for cellular automata. 
  
 To be updated with more analysis
 
-| [![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)]  | [![
-Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png)] |
-
-| [![VideoBlocks](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)](http://videoblocks.com)  | [![AudioBlocks](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png)](http://audioblocks.com) | [![GraphicStock](http://www.graphicstock.com/images/logo.jpg)](http://graphicstock.com) |
-|:---:|:---:|:---:|
+| [![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)](http://videoblocks.com)  | [![Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png)](http://audioblocks.com) | 
+|:---:|:---:|
 
