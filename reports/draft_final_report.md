@@ -2,6 +2,7 @@
 By Danny Kang, Jeremy Ryan, and Nick Sherman
  
 ## **Abstract**
+ 
 In ocellated lizards, patterns can be observed on their skin due to green and black labyrinthine patterns created by their lizard scale color. We wish to analyze how such patterns can form through using data gathered from ocellated lizards as they mature and mimic the pattern produced through cellular automaton. </ br>
 We developed manukyan model based on cellular automata to simulate changes in lizard network. The manukyan model contains table of probability values that determines the likeliness of color change of each scale in network. We extended our model by adding brown and white state to green and black state. Furthermore, we experimented with deterministic behaviour in cellular automata to see difference in behavior of model. Pygame was used to visualize the simulation of our model and networkx and matplotlib were used to transform our model to graphs to conduct deeper graphical analysis.
 ---
@@ -35,7 +36,9 @@ For each cell color, based on its number of like-colored neighbors, there is a p
 The original paper, having built the model from graphs of actual lizard scales, has probabilities that may be slightly skewed from our own. Actual scales are not perfectly hexagonal, and sometimes there are scales with more or fewer than six neighbors. As such, there were entries in the original paper for probability with seven like-colored neighbors which were not used in our model.
  Following is the average probability mass function graph for both green and black scales after this model stabilizes. 
  
-<img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/stablized.png" width="500" height="500" style="text-align:center"/>
+ <p align="center">
+    <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/stablized.png"  width="350" height="350" />
+ </p>
  
 As far as the distribution of number of neighbors is concerned, the result above closely resembles the actual result of lizards in terms of shape. However, our model peaks at 2 neighbors for green scales and 3 neighbors for black scales whereas the actual model peaks at 3 neighbors for green scales and 4 neighbors for black scales. One potential cause for this difference is the values of the probabilities in the table. 
  
@@ -62,7 +65,14 @@ For the deterministic model of lizard, we used two rules for cellular automata. 
  </p>
  
 To be updated with more analysis
-
-| [![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)](http://videoblocks.com)  | [![Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png)](http://audioblocks.com) | 
+ 
+| [![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png)]  | [![Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png)]| 
 |:---:|:---:|
+ 
+ 
+ 
+| [![CdfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_initial.png)]  | [![Cdf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_300steps.png)] | 
+|:---:|:---:|
+ 
+
 
