@@ -54,7 +54,9 @@ For the deterministic model of lizard, we used two rules for cellular automata. 
  
 ### 4. Graphical Analysis 
  
-<img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph_analysis.png" width="500" height="500" style="text-align:center"/>
+ <p align="center">
+   <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/graph_analysis.png" width="400" height="300"/>
+ </p>
  
 To be updated with more analysis
 
