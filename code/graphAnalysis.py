@@ -19,7 +19,7 @@ import random
 from pylab import *
 
 hexmap = HexMap(width=100, height=100)
-# hexmap = HexMap(width=60, height=60)
+# hexmap = HexMap(width=25, height=25)
 
 all_vals = dict()
 
@@ -57,16 +57,22 @@ def create_hexmap(hexmap, show=False):
 
 def convert_graph_draw(hexmap, steps=0, show=False):
     all_data = []
+    all_steps = []
     for i in range(steps):
         if (i % 10) == 0:
+            all_steps.append(i)
             all_data.append(get_data(create_hexmap(hexmap)))
         hexmap.step()
     all_data.append(get_data(create_hexmap(hexmap)))
-    for x in all_data:
-        print(np.amin(x))
+    all_steps.append(steps)
     fig, ax = plt.subplots()
     plt.yscale('log')
-    ax.boxplot(all_data)
+    all = [x for x in range(0, len(all_data) )]
+    bp = boxplot(all_data, positions = all, manage_ticks=True, widths = 0.6)
+    plt.xticks(range(0, len(all)), all_steps, fontsize=6)
+    plt.title('Boxplot of Subgraph Size over Time')
+    plt.xlabel('Time Step')
+    plt.ylabel('Number of Nodes in Subgraph')
     plt.show()
     X = create_hexmap(hexmap, True)
     return X
@@ -110,7 +116,7 @@ def plot_graph_pmf(G, steps=None):
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
-G = convert_graph_draw(hexmap, steps=300)    
+G = convert_graph_draw(hexmap, steps=300)
 plot_graph_pmf(G,300)
 # plot_graph_cdf(G,)
 

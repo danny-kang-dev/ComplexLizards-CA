@@ -116,7 +116,7 @@ class HexCell(object):
 
     def __init__(self):
         self.state = None
-        self.randomize_state(aging=False)
+        self.randomize_state(aging=True)
         self.neighbors = []
         self.stored_neighbor_states = None
         self.update_function = manukyan
