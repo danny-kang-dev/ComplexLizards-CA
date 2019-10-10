@@ -16,8 +16,9 @@ import seaborn as sns
 
 import networkx as nx
 import random
+from pylab import *
 
-hexmap = HexMap(width=35, height=25)
+hexmap = HexMap(width=100, height=100)
 
 def convert_graph_draw(hexmap, steps=0, show=False):
     for i in range(steps):
@@ -60,8 +61,23 @@ def plot_graph_pmf(G):
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
     X = np.column_stack((val, pmf))
-    plt.bar(x=X[:, 0], height=X[:, 1])
+    _, ax = plt.subplots()
+    ax.bar(x=X[:, 0], height=X[:, 1])
+    ax.set_yscale('log')
+    ax.set_xscale('log')
     plt.show()
+
+def plot_graph_cdf(G):
+    num_nodes = np.array([])
+    for i in sorted(nx.connected_components(G), key=len, reverse=True):
+        num_nodes = np.append(num_nodes, len(i))
+    val, cnt = np.unique(num_nodes, return_counts=True)
+    pmf = cnt / len(num_nodes)
+    cdf = np.cumsum(pmf)
+    plot(val, cdf)
+    show()
+
     
-G = convert_graph_draw(hexmap, show=True)
+G = convert_graph_draw(hexmap, steps=10)
 plot_graph_pmf(G)
+plot_graph_cdf(G)
