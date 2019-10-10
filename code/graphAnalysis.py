@@ -17,11 +17,11 @@ import seaborn as sns
 import networkx as nx
 import random
 
-hexmap = HexMap(width=35, height=25)
+hexmap = HexMap(width=60, height=60)
 
-def convert_graph_draw(hexmap, steps=0, show=False):
-    for i in range(steps):
-        hexmap.step()
+all_vals = dict()
+
+def create_hexmap(hexmap, show=False):
     X=nx.Graph()
     node_num = 1
     offset = 0
@@ -53,15 +53,39 @@ def convert_graph_draw(hexmap, steps=0, show=False):
         plt.show()
     return X
 
-def plot_graph_pmf(G):
+def convert_graph_draw(hexmap, steps=0, show=False):
+    all_data = []
+    for i in range(steps):
+        if (i % 10) == 0:
+            all_data.append(get_data(create_hexmap(hexmap)))
+        hexmap.step()
+    all_data.append(get_data(create_hexmap(hexmap)))
+    for x in all_data:
+        print(np.amin(x))
+    fig, ax = plt.subplots()
+    plt.yscale('log')
+    ax.boxplot(all_data)
+    plt.show()
+    X = create_hexmap(hexmap, True)
+    return X
+
+def get_data(G):
     num_nodes = np.array([])
     for i in sorted(nx.connected_components(G), key=len, reverse=True):
         num_nodes = np.append(num_nodes, len(i))
+    return num_nodes
+
+def get_pmf_data(num_nodes):
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
     X = np.column_stack((val, pmf))
+    return X
+
+def plot_graph_pmf(G):
+    X = get_pmf_data(get_data(G))
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
-    
-G = convert_graph_draw(hexmap, show=True)
+
+
+G = convert_graph_draw(hexmap, steps=150, show=True)
 plot_graph_pmf(G)
