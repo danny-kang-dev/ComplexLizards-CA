@@ -50,13 +50,13 @@ One of the interesting observations about the ocellated lizard is the change in 
 The first (and easier) experiment that we implemented was the set possible states of colors. We wanted to see how the color distribution changed over time and see if we can visually mimic what the ocellated lizards do while maintaining similar black:green ratios at the end of the simulation (the papers did not give a brown:white ratio to compare to). What we observed was that visually it looks similar to the ocellated lizards’ skin over time, with the major difference being that the colors change suddenly (as is expected). A view of the beginning of the transition period can be seen in the below image.
 
  <p align="center">
-    <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/color_change.png"  width="350" height="350" />
+![CA model](https://raw.githubusercontent.com/kdy304g/ComplexLizards-CA/master/images/color_change.png)
  </p>
 
 For the end color distribution, we found that the colors don’t seem to differentiate greatly from the stabilized image of the original experiment. This can be seen in the below image.
 
  <p align="center">
-    <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/end_time.png"  width="350" height="350" />
+![CA model](https://raw.githubusercontent.com/kdy304g/ComplexLizards-CA/master/images/end_time.png)
  </p>
 
 ### 3. Deterministic model
@@ -93,5 +93,5 @@ As shown in graphs after running the model 300steps, general trend in both pmf a
 The final way we wanted to show this data was through an overview of what the boxplots look of connected subgraphs over time. Through this, we were able to ascertain how far away from different percentiles the maximally sized subgraphs were. In the situation we were looking at (100 nodes x 100 nodes), the biggest subgraph is the only subgraph that’s above 1000 nodes large after 10 time steps, and over time the smaller subgraphs slowly seem to condense to between 20-90 nodes per subgraph. This gives helps us also better interpret the PMF and CDFs, and demonstrates that there really are a lot of nodes who are alone in their connected subgraphs.
 
  <p align="center">
-    <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/boxplots.png" width="350" height="350" />
+![CA model](https://raw.githubusercontent.com/kdy304g/ComplexLizards-CA/master/images/boxplots.png)
  </p>
