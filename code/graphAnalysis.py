@@ -85,7 +85,7 @@ def get_pmf_data(num_nodes, steps=None):
     ax.bar(x=X[:, 0], height=X[:, 1])
     ax.set_yscale('log')
     ax.set_xscale('log')
-    title = 'Initial state' if not steps else '%s steps' %(str(steps))
+    title = 'Initial state (Max: %s nodes)' %(str(int(num_nodes[0]))) if not steps else '%s steps (Max: %s nodes)' %(str(steps), str(int(num_nodes[0])))
     plt.title(title, fontdict=None, loc='center', pad=None)
     plt.xlabel('Number of nodes (per connected subgraph)')
     plt.ylabel('PMF')
