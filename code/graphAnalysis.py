@@ -19,7 +19,7 @@ import random
 from pylab import *
 
 hexmap = HexMap(width=100, height=100)
-hexmap = HexMap(width=60, height=60)
+# hexmap = HexMap(width=60, height=60)
 
 all_vals = dict()
 
@@ -77,7 +77,7 @@ def get_data(G):
         num_nodes = np.append(num_nodes, len(i))
     return num_nodes
 
-def get_pmf_data(num_nodes):
+def get_pmf_data(num_nodes, steps=None):
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
     X = np.column_stack((val, pmf))
@@ -85,27 +85,36 @@ def get_pmf_data(num_nodes):
     ax.bar(x=X[:, 0], height=X[:, 1])
     ax.set_yscale('log')
     ax.set_xscale('log')
+    title = 'Initial state' if not steps else '%s steps' %(str(steps))
+    plt.title(title, fontdict=None, loc='center', pad=None)
+    plt.xlabel('Number of nodes (per connected subgraph)')
+    plt.ylabel('PMF')
     plt.show()
 
-def plot_graph_cdf(G):
+def plot_graph_cdf(G, steps=None):
     num_nodes = np.array([])
     for i in sorted(nx.connected_components(G), key=len, reverse=True):
         num_nodes = np.append(num_nodes, len(i))
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
     cdf = np.cumsum(pmf)
+    title = 'Initial state' if not steps else '%s steps' %(str(steps))
+    plt.title(title, fontdict=None, loc='center', pad=None)
+    plt.xlabel('Number of nodes (per connected subgraph)')
+    plt.ylabel('CDF')
     plot(val, cdf)
     show()
 
-    
-G = convert_graph_draw(hexmap, steps=10)
-plot_graph_pmf(G)
-plot_graph_cdf(G)
-
-def plot_graph_pmf(G):
-    X = get_pmf_data(get_data(G))
+def plot_graph_pmf(G, steps=None):
+    X = get_pmf_data(get_data(G), steps=steps)
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
-G = convert_graph_draw(hexmap, steps=150, show=True)
-plot_graph_pmf(G)
+G = convert_graph_draw(hexmap, steps=300)    
+plot_graph_pmf(G,300)
+# plot_graph_cdf(G,)
+
+
+
+# G = convert_graph_draw(hexmap, steps=150, show=True)
+# plot_graph_pmf(G)
