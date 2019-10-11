@@ -36,6 +36,8 @@ For each cell color, based on its number of like-colored neighbors, there is a p
 The original paper, having built the model from graphs of actual lizard scales, has probabilities that may be slightly skewed from our own. Actual scales are not perfectly hexagonal, and sometimes there are scales with more or fewer than six neighbors. As such, there were entries in the original paper for probability with seven like-colored neighbors which were not used in our model.
  Following is the average probability mass function graph for both green and black scales after this model stabilizes.
 
+[Plot of stabilized PMF](https://raw.githubusercontent.com/kdy304g/ComplexLizards-CA/master/images/lizard_plot.png)
+
  <p align="center">
     <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/stablized.png"  width="350" height="350" />
  </p>
