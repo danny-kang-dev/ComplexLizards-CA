@@ -3,7 +3,7 @@ By Danny Kang, Jeremy Ryan, and Nick Sherman
 
 ## **Abstract**
 
-In ocellated lizards, patterns can be observed on their skin due to green and black labyrinthine patterns created by their lizard scale color. We wish to analyze how such patterns can form through using data gathered from ocellated lizards as they mature and mimic the pattern produced through cellular automaton. </ br>
+In ocellated lizards, patterns can be observed on their skin due to green and black labyrinthine patterns created by their lizard scale color. We wish to analyze how such patterns can form through using data gathered from ocellated lizards as they mature and mimic the pattern produced through cellular automaton. <br />
 We developed manukyan model based on cellular automata to simulate changes in lizard network. The manukyan model contains table of probability values that determines the likeliness of color change of each scale in network. We extended our model by adding brown and white state to green and black state. Furthermore, we experimented with deterministic behaviour in cellular automata to see difference in behavior of model. Pygame was used to visualize the simulation of our model and networkx and matplotlib were used to transform our model to graphs to conduct deeper graphical analysis.
 ---
 ## **Annotated bibliography**
