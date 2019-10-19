@@ -106,6 +106,10 @@ class HexMap(object):
         """ Returns a dictionary mapping different states to their respective counts in the map. """
 
         dictionary = {}
+        dictionary[BLACK_STATE] = 0
+        dictionary[GREEN_STATE] = 0
+        dictionary[WHITE_STATE] = 0
+        dictionary[BROWN_STATE] = 0
         for cell in self.tiles():
             dictionary[cell.state] = dictionary.get(cell.state, 0) + 1
         return dictionary
@@ -159,7 +163,6 @@ class HexCell(object):
 
     def color(self):
         """ Returns an RGB color value based on the current state. """
-        # TODO expand switch statement for more than two states
         if self.state is BLACK_STATE:
             return GRAY
         elif self.state is GREEN_STATE:
