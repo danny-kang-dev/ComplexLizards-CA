@@ -6,7 +6,7 @@ import random
 class HexMap(object):
     """ Represents a 2D array of hexagonal cells. """
 
-    def __init__(self, width=50, height=50):
+    def __init__(self, width=70, height=70):
         """ Creates the HexMap object.
 
             inputs:

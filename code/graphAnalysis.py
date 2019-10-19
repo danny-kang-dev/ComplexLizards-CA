@@ -16,12 +16,14 @@ import seaborn as sns
 
 import networkx as nx
 import random
+from pylab import *
 
-hexmap = HexMap(width=35, height=25)
+hexmap = HexMap(width=100, height=100)
+# hexmap = HexMap(width=25, height=25)
 
-def convert_graph_draw(hexmap, steps=0, show=False):
-    for i in range(steps):
-        hexmap.step()
+all_vals = dict()
+
+def create_hexmap(hexmap, show=False):
     X=nx.Graph()
     node_num = 1
     offset = 0
@@ -53,15 +55,72 @@ def convert_graph_draw(hexmap, steps=0, show=False):
         plt.show()
     return X
 
-def plot_graph_pmf(G):
+def convert_graph_draw(hexmap, steps=0, show=False):
+    all_data = []
+    all_steps = []
+    for i in range(steps):
+        if (i % 10) == 0:
+            all_steps.append(i)
+            all_data.append(get_data(create_hexmap(hexmap)))
+        hexmap.step()
+    all_data.append(get_data(create_hexmap(hexmap)))
+    all_steps.append(steps)
+    fig, ax = plt.subplots()
+    plt.yscale('log')
+    all = [x for x in range(0, len(all_data) )]
+    bp = boxplot(all_data, positions = all, manage_ticks=True, widths = 0.6)
+    plt.xticks(range(0, len(all)), all_steps, fontsize=6)
+    plt.title('Boxplot of Subgraph Size over Time')
+    plt.xlabel('Time Step')
+    plt.ylabel('Number of Nodes in Subgraph')
+    plt.show()
+    X = create_hexmap(hexmap, True)
+    return X
+
+def get_data(G):
+    num_nodes = np.array([])
+    for i in sorted(nx.connected_components(G), key=len, reverse=True):
+        num_nodes = np.append(num_nodes, len(i))
+    return num_nodes
+
+def get_pmf_data(num_nodes, steps=None):
+    val, cnt = np.unique(num_nodes, return_counts=True)
+    pmf = cnt / len(num_nodes)
+    X = np.column_stack((val, pmf))
+    _, ax = plt.subplots()
+    ax.bar(x=X[:, 0], height=X[:, 1])
+    ax.set_yscale('log')
+    ax.set_xscale('log')
+    title = 'Initial state (Max: %s nodes)' %(str(int(num_nodes[0]))) if not steps else '%s steps (Max: %s nodes)' %(str(steps), str(int(num_nodes[0])))
+    plt.title(title, fontdict=None, loc='center', pad=None)
+    plt.xlabel('Number of nodes (per connected subgraph)')
+    plt.ylabel('PMF')
+    plt.show()
+
+def plot_graph_cdf(G, steps=None):
     num_nodes = np.array([])
     for i in sorted(nx.connected_components(G), key=len, reverse=True):
         num_nodes = np.append(num_nodes, len(i))
     val, cnt = np.unique(num_nodes, return_counts=True)
     pmf = cnt / len(num_nodes)
-    X = np.column_stack((val, pmf))
+    cdf = np.cumsum(pmf)
+    title = 'Initial state' if not steps else '%s steps' %(str(steps))
+    plt.title(title, fontdict=None, loc='center', pad=None)
+    plt.xlabel('Number of nodes (per connected subgraph)')
+    plt.ylabel('CDF')
+    plot(val, cdf)
+    show()
+
+def plot_graph_pmf(G, steps=None):
+    X = get_pmf_data(get_data(G), steps=steps)
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
-    
-G = convert_graph_draw(hexmap, show=True)
-plot_graph_pmf(G)
+
+G = convert_graph_draw(hexmap, steps=300)
+plot_graph_pmf(G,300)
+# plot_graph_cdf(G,)
+
+
+
+# G = convert_graph_draw(hexmap, steps=150, show=True)
+# plot_graph_pmf(G)
