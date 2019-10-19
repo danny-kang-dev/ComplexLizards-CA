@@ -10,6 +10,7 @@ from constants import *
 
 # libraries
 import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -17,6 +18,7 @@ import seaborn as sns
 import networkx as nx
 import random
 from pylab import *
+
 
 hexmap = HexMap(width=100, height=100)
 # hexmap = HexMap(width=25, height=25)
@@ -58,11 +60,40 @@ def create_hexmap(hexmap, show=False):
 def convert_graph_draw(hexmap, steps=0, show=False):
     all_data = []
     all_steps = []
+    distributions = []
     for i in range(steps):
         if (i % 10) == 0:
             all_steps.append(i)
             all_data.append(get_data(create_hexmap(hexmap)))
+        distributions.append(hexmap.state_histogram())
         hexmap.step()
+    distributions.append(hexmap.state_histogram())
+
+    green_num = []
+    black_num = []
+    white_num = []
+    brown_num = []
+
+    for x in distributions:
+        green_num.append(x[GREEN_STATE])
+        white_num.append(x[WHITE_STATE])
+        black_num.append(x[BLACK_STATE])
+        brown_num.append(x[BROWN_STATE])
+
+    fig, ax = plt.subplots()
+
+    plt.plot(green_num, color='green', label='Green')
+    plt.plot(white_num, color='grey', label='White')
+    plt.plot(brown_num, color='brown', label='Brown')
+    plt.plot(black_num, color='black', label='Black')
+    plt.xlabel('Time Step')
+    plt.ylabel('Number of Nodes')
+    plt.title('Plot of Number of Colored Nodes over Time')
+    fontP = FontProperties()
+    fontP.set_size('small')
+    plt.legend(prop=fontP)
+    plt.show()
+
     all_data.append(get_data(create_hexmap(hexmap)))
     all_steps.append(steps)
     fig, ax = plt.subplots()
@@ -116,8 +147,8 @@ def plot_graph_pmf(G, steps=None):
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
-G = convert_graph_draw(hexmap, steps=300)
-plot_graph_pmf(G,300)
+G = convert_graph_draw(hexmap, steps=500)
+plot_graph_pmf(G,500)
 # plot_graph_cdf(G,)
 
 
