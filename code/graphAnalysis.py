@@ -139,6 +139,7 @@ def plot_graph_cdf(G, steps=None):
     plt.title(title, fontdict=None, loc='center', pad=None)
     plt.xlabel('Number of nodes (per connected subgraph)')
     plt.ylabel('CDF')
+    plt.xscale('log')
     plot(val, cdf)
     show()
 
@@ -147,6 +148,9 @@ def plot_graph_pmf(G, steps=None):
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
+G = convert_graph_draw(hexmap, steps=300)
+# plot_graph_pmf(G,300)
+plot_graph_cdf(G, 300)
 G = convert_graph_draw(hexmap, steps=500)
 plot_graph_pmf(G,500)
 # plot_graph_cdf(G,)
