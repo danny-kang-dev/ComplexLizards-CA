@@ -20,11 +20,6 @@ import random
 from pylab import *
 
 
-hexmap = HexMap(width=100, height=100)
-# hexmap = HexMap(width=25, height=25)
-
-all_vals = dict()
-
 def create_hexmap(hexmap, show=False):
     X=nx.Graph()
     node_num = 1
@@ -148,14 +143,20 @@ def plot_graph_pmf(G, steps=None):
     plt.bar(x=X[:, 0], height=X[:, 1])
     plt.show()
 
-G = convert_graph_draw(hexmap, steps=300)
-# plot_graph_pmf(G,300)
-plot_graph_cdf(G, 300)
-G = convert_graph_draw(hexmap, steps=500)
-plot_graph_pmf(G,500)
-# plot_graph_cdf(G,)
+if __name__=="__main__":
+    hexmap = HexMap(width=100, height=100)
+    # hexmap = HexMap(width=25, height=25)
+
+    all_vals = dict()
+    
+    G = convert_graph_draw(hexmap, steps=300)
+    # plot_graph_pmf(G,300)
+    plot_graph_cdf(G, 300)
+    G = convert_graph_draw(hexmap, steps=500)
+    plot_graph_pmf(G,500)
+    # plot_graph_cdf(G,)
 
 
 
-# G = convert_graph_draw(hexmap, steps=150, show=True)
-# plot_graph_pmf(G)
+    # G = convert_graph_draw(hexmap, steps=150, show=True)
+    # plot_graph_pmf(G)
