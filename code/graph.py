@@ -95,6 +95,8 @@ def draw_manukyan_pmf(update_function, steps):
 
     # Initialize hex map
     hexmap = HexMap(width=100, height=100)
+    for tile in hexmap.tiles():
+        tile.randomize_state(aging=False)
     hexmap.set_update_function(update_function)
 
     # Plot initial random distribution
