@@ -141,8 +141,6 @@ def plot_graph_cdf(G, steps=None):
 
 def plot_graph_pmf(G, steps=None):
     X = get_pmf_data(get_data(G), steps=steps)
-    plt.bar(x=X[:, 0], height=X[:, 1])
-    plt.show()
 
 if __name__=="__main__":
     hexmap = HexMap(width=100, height=100)
