@@ -17,7 +17,7 @@ We developed a cellular automaton model, based on the work of Manukyan et al, to
 
 As ocellated lizards mature, the patterns on their scales change from a medium brown color with white ocelli as juveniles, to a labyrinthine green and black pattern as adults. Furthermore, these patterns continue to morph and change over time in a way consistent with a probabilistic, totalistic cellular automaton, as demonstrated by Manukyan et al.<sup>[1]</sup>
 
-In this report, we aim to replicate the results of that paper with our own Python implementation of their cellular automaton, as well as perform three extension experiments to analyze the graphical structure of the resulting pattern and model intermediate states.
+In this report, we aim to replicate the results published by Manukyan et al. with our own Python implementation of their cellular automaton, as well as perform three extension experiments to analyze the graphical structure of the resulting pattern and model intermediate states.
 
 ## **Experiments**
 
@@ -31,9 +31,9 @@ For our experiments, we replicated and extended the cellular automaton model fro
 
 Our first model is a direct implementation of the model used in the Manukyan et al paper.
 
-For each cell color, based on its number of like-colored neighbors, there is a probability of changing state before the next time step. In our implementation, we copied these values from the Manukyan paper using Logger Pro. 
+For each cell color, there is a probability of changing state before the next time step based on its number of like-colored neighbors. In our implementation, we copied these values from the Manukyan paper using Logger Pro. 
 
-For example, if a green cell has exclusively black neighbors, there is a 0% chance of changing state between two time steps. This increases as the number of like-colored cells increases, to over 40% if it has exclusively green neighbors. This probability distribution is somewhat different for black scales, but has generally the same behavior.
+For example, if a green cell has exclusively black neighbors there is a 0% chance of it changing state between two time steps. The probability increases as the number of like-colored cells increases until it is over 40% if it has exclusively green neighbors. This probability distribution is slightly different for black scales, but generally behaves the same.
 
 ![Plot of probability of change based vs differently-colored neighbors for green and black scales](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/scale_ca_distribution.png?raw=true)
 
@@ -47,7 +47,7 @@ The original paper, having built the model from graphs of actual lizard scales, 
 
 Unlike the random distribution, both the observed scale distribution and the distribution from our cellular automaton have strong peaks at three and four neighbors for green and black scales, respectively. Additionally, the green curves are shifted right, indicating a bias for differently-colored neighbors.
 
-While our model's distribution is not exactly the same as the distribution for actual lizards, this still appears to validate our model. The differences between our model and the results of the Manukyan model could be due to our relatively small simulation size, or the fact that we modeled all scales as having exactly six neighbors, contrary to some patterns seen in actual lizards.
+While our model's distribution is not exactly the same as the distribution for actual lizards, this still appears to validate our model. The differences between our model and the results of the Manukyan model could be due to our relatively small simulation size or because we modeled all scales as having exactly six neighbors, contrary to patterns seen in actual lizards.
 
 
 ### 2. Adding brown white states
@@ -81,17 +81,17 @@ We wanted to analyze how the  characteristics changed over time, and saw that af
 
 ### 3. Deterministic model
 
-Manukyan model is based on probability of change depending on the number of neighbors. What if the cellular automata model were to evolve deterministically according to set of rules? In this experiment, we intend to define and use rules in the new model to produce similar behavior.
+The Manukyan model is based on probability of color state change depending on the number of neighbors. While considering this, we pondered the implications of if the cellular automata model were to evolve deterministically according to set of rules. In this experiment, we intend to define and use rules in the new model to produce similar behavior to the original paper.
 
 ![Plot of neighbor distribution for green and black cells in the deterministic model](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/deterministic_graph.png?raw=true)
 
-For the deterministic model of lizard, two rules for cellular automata are applied. The first rule is to convert a green scale to a black scale when there are more than 3 black neighbors. The second rule is to convert a black scale to a green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produce extreme behavior, in which all scales except for few scales at corner turn to green in less than 10 steps. This is not unexpected due to the limited number of rules that we explored, but we would still hope that for future steps we would be able to create a more complicated system of rules to better mimic patterns in real lizards.
+For the deterministic model of lizard, two rules for cellular automata are applied: the first is to convert a green scale to a black scale when there are more than 3 black neighbors; the second is to convert a black scale to a green scale when there are more than 2 green neighbors. To our disappointment, running the model based on these two rules produce extreme behavior, in which all scales except for few scales at corner turn to green in less than 10 steps. This is not unexpected due to the limited number of rules that we explored, but we would still hope that for future steps we would be able to create a more complicated system of rules to better mimic patterns in real lizards.
 
 ### 4. Graphical Analysis
-In the first experiment for Manukyan model for green black states,  we validated our model with pmf distribution of number of neighbors. While the number of neighbors is a solid metric to validate our model, we intend to convert our model to graph to do further analysis of the model in terms of connectedness.
+In the first experiment for Manukyan model for green black states,  we validated our model with a pmf distribution of number of neighbors. While the number of neighbors is a reasonable metric to validate our model, we intend to perform further analysis of our model's connectedness through a graph.
  
 
-The graph is converted from our model using the library NetworkX with two simple rules. Color of the nodes are represented correspondingly in green, black, white, and brown. there are edges between all the same color nodes. For this experiment, we focus on green and black nodes’ initial and final state after stabilization.  We consider a model of both height and width of 100, with a total number of scales of 10,000.
+The graph is converted from our model using the library NetworkX with two simple rules. Color of the nodes are represented correspondingly in green, black, white, and brown and there are edges between all the same color nodes. For this experiment, we focus on green and black nodes’ initial and final state after stabilization.  We consider a model of both height and width of 100, totalling 10,000 scales.
 
 | ![PmfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_initial.png?raw=true) | ![CdfInitial](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_initial.png?raw=true) |
 |:---:|:---:|
@@ -101,7 +101,7 @@ Graphs were drawn in log-log scale for the PMF in order to include a high propor
 | ![Pmf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/PMF_300steps.png?raw=true) |![Cdf300steps](https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/CDF_300steps.png?raw=true) |
 |:---:|:---:|
 
-As shown in graphs after running the model 300steps, the general trend in both the pmf and cdf remain similar with a few changes. After model stabilizes, the gap between small graphs reduces in the pmf. Also, the number of nodes in the largest connected subgraph almost doubles to 5,490 from 2,500. This is interesting but not too surprising as the number of green scales dominates the number of black scales after stabilization.
+As shown in graphs after running the model 300 steps, the general trend in both the pmf and cdf remain similar. The few small differences include gap reduction between small graphs in the pmf post-model stabilization and the number of nodes in the largest connected subgraph almost doubling to 5,490 from 2,500. This is interesting but not too surprising as the number of green scales outnumbers the black scales after stabilization.
 
  <p align="center">
     <img src="https://github.com/kdy304g/ComplexLizards-CA/blob/master/images/boxplots.png?raw=true" width="700" height="350" />
@@ -111,7 +111,7 @@ The final way we wanted to show this data was through an overview of what the bo
  
  
 ## Future Works
-In this report, we compare the result of our model with that of ocellated lizards in the first experiment in terms of PMF distribution of number of neighbors. In the future it would be desirable to attain actual data of scale colors of ocellated lizards instead of processed numerical data from the original paper. The benefit of doing this is that we would have exact knowledge of the ocellated lizards' scale colors throughout their life and allow a direct comparison of this data instead of attempting to guess through the original paper's graphs.
+In this report, we compare the result of our model with that of ocellated lizards' data gathered by Manukyan et al in terms of PMF distribution of number of neighbors. In the future it would be desirable to attain actual data of scale colors of ocellated lizards instead of processed numerical data from the original paper. The benefit of doing this is that we would have exact knowledge of the ocellated lizards' scale colors throughout their life and allow a direct comparison of this data instead of attempting to guess through the original paper's graphs.
 
 Creating a whole new model with reaction diffusion could be an interesting extension to our work since our model is based on Manukyan probabilities that determine how likely scales change color depedning on their surrounding neighbors. The papers listed below in the annotated bibliography section support this argument.
 
@@ -140,3 +140,8 @@ Shigeru Kondo1, Takashi Miura
 https://science.sciencemag.org/content/sci/329/5999/1616.full.pdf
 
 This paper explains about the reaction-diffusion model or Turing model and emphasizes its role in understanding spatial skin pattern formation of vertebrates and suggests possible applications of this model. The paper acknowledges the difficulty of applying two dimensional Turing model to complex biological system and mentions a few discoveries that made possible the application of Turing model. According to paper, Gierer and Meinhardt showed that a system needs only to include a network that combines “”a short-range positive feedback with a long-range negative feedback” to generate a Turing pattern, which is now accepted as the basic requirement for Turing pattern formation. Modern genetic and molecular techniques makes it possible to identify such elements of interactive networks in living organisms. Further analysis is possible by predicting dynamic properties of the pattern using computer simulation. Also according to paper, observation of the dynamic properties of Turing patterns in nature was made by Kondo and Asai in a study of horizontal stripes in the tropical fish, Pomacanthus imperator. Paper ends in a positive note about applying Turing model by saying that artificial generation of Turing patterns in cell culture should be possible in the near future as the result of synthetic biology.
+
+## **Links to Notebook and Binder**
+
+[1] Notebook: https://nbviewer.jupyter.org/github/kdy304g/ComplexLizards-CA/blob/master/code/Results%20Generator.ipynb
+[2] Binder: https://hub.gke.mybinder.org/user/kdy304g-complexlizards-ca-fsltmhkw/tree/code
