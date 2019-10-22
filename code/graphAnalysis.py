@@ -57,7 +57,7 @@ def convert_graph_draw(hexmap, steps=0, show=False):
     all_steps = []
     distributions = []
     for i in range(steps):
-        if (i % 10) == 0:
+        if (i % 30) == 0:
             all_steps.append(i)
             all_data.append(get_data(create_hexmap(hexmap)))
         distributions.append(hexmap.state_histogram())
@@ -122,6 +122,7 @@ def get_pmf_data(num_nodes, steps=None):
     plt.xlabel('Number of nodes (per connected subgraph)')
     plt.ylabel('PMF')
     plt.show()
+    return X
 
 def plot_graph_cdf(G, steps=None):
     num_nodes = np.array([])
