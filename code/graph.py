@@ -100,29 +100,27 @@ def draw_manukyan_pmf(update_function, steps):
     hexmap.set_update_function(update_function)
 
     # Plot initial random distribution
-    df1 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 1)})
-    df2 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 0)})
-    plt.plot('x', 'y', data=df1, linestyle=':', marker='o', color='green', label='Green - RD')
-    plt.plot('x', 'y', data=df2, linestyle=':', marker='o', color='black', label='Black - RD')
+    df1 = pd.DataFrame({'x': range(7), 'y_vals': update_pmf_values(hexmap, 1)})
+    df2 = pd.DataFrame({'x': range(7), 'y_vals': update_pmf_values(hexmap, 0)})
+    plt.plot('x', 'y_vals', data=df1, linestyle=':', marker='o', color='green', label='Green - RD')
+    plt.plot('x', 'y_vals', data=df2, linestyle=':', marker='o', color='black', label='Black - RD')
 
     # Run simulation for 1000 steps
     n_steps = 1000
     for i in range(n_steps):
-        if i % 100 == 0:
-            print("%s%%" % (i/n_steps*100))
         hexmap.step()
 
     # Plot distribution after simulating for 1000 time steps
-    df1 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 1)})
-    df2 = pd.DataFrame({'x': range(7), 'y': update_pmf_values(hexmap, 0)})
-    plt.plot('x', 'y', data=df1, linestyle='-', marker='o', color='green', label='Green - CA')
-    plt.plot('x', 'y', data=df2, linestyle='-', marker='o', color='black', label='Black - CA')
+    df1 = pd.DataFrame({'x': range(7), 'y_vals': update_pmf_values(hexmap, 1)})
+    df2 = pd.DataFrame({'x': range(7), 'y_vals': update_pmf_values(hexmap, 0)})
+    plt.plot('x', 'y_vals', data=df1, linestyle='-', marker='o', color='green', label='Green - CA')
+    plt.plot('x', 'y_vals', data=df2, linestyle='-', marker='o', color='black', label='Black - CA')
 
     # Plot hard-coded values from Manukyan paper
-    df1 = pd.DataFrame({'x': range(7), 'y': (0, 2/504, 17/504, 112/504, 241/504, 119/504, 16/504)})
-    df2 = pd.DataFrame({'x': range(7), 'y': (0, 23/504, 118/504, 209/504, 126/504, 26/504, 3/504)})
-    plt.plot('x', 'y', data=df1, linestyle='-.', marker='o', color='green', label='Green - M')
-    plt.plot('x', 'y', data=df2, linestyle='-.', marker='o', color='black', label='Black - M')
+    df1 = pd.DataFrame({'x': range(7), 'y_vals': (0, 2/504, 17/504, 112/504, 241/504, 119/504, 16/504)})
+    df2 = pd.DataFrame({'x': range(7), 'y_vals': (0, 23/504, 118/504, 209/504, 126/504, 26/504, 3/504)})
+    plt.plot('x', 'y_vals', data=df1, linestyle='-.', marker='o', color='green', label='Green - M')
+    plt.plot('x', 'y_vals', data=df2, linestyle='-.', marker='o', color='black', label='Black - M')
 
     # Format and show plot
     plt.xlabel('Number of Neighbors')
@@ -135,5 +133,5 @@ def draw_manukyan_pmf(update_function, steps):
 
 
 if __name__=="__main__":
-    draw_pmf(helpers.manukyan, 500)
+    draw_manukyan_pmf(helpers.manukyan, 500)
     # draw_pmf(helpers.deterministic, 10)
