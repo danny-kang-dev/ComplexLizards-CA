@@ -134,5 +134,6 @@ def draw_manukyan_pmf(update_function, steps):
     plt.show()
 
 
-draw_pmf(helpers.manukyan, 500)
-# draw_pmf(helpers.deterministic, 10)
+if __name__=="__main__":
+    draw_pmf(helpers.manukyan, 500)
+    # draw_pmf(helpers.deterministic, 10)

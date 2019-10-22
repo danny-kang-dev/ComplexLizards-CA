@@ -148,7 +148,7 @@ if __name__=="__main__":
     # hexmap = HexMap(width=25, height=25)
 
     all_vals = dict()
-    
+
     G = convert_graph_draw(hexmap, steps=300)
     # plot_graph_pmf(G,300)
     plot_graph_cdf(G, 300)
