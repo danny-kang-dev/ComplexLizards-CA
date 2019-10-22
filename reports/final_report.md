@@ -145,4 +145,4 @@ This paper explains about the reaction-diffusion model or Turing model and empha
 
 [1] Notebook: https://nbviewer.jupyter.org/github/kdy304g/ComplexLizards-CA/blob/master/code/Results%20Generator.ipynb 
 
-[2] Binder: https://hub.gke.mybinder.org/user/kdy304g-complexlizards-ca-fsltmhkw/tree/code
+[2] Binder: https://mybinder.org/v2/gh/kdy304g/ComplexLizards-CA/master?filepath=%2Fcode%2FResults%20Generator.ipynb
